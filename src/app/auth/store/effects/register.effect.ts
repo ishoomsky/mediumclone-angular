@@ -23,7 +23,7 @@ export class RegisterEffect {
           }),
 
           catchError(() => {
-            return of(registerFailureAction);
+            return of(registerFailureAction());
           })
         );
       })
