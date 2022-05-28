@@ -1,11 +1,10 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { PersistanceService } from 'src/app/shared/services/persistance.service';
-
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
 import { AuthService } from '../../services/auth.service';
 import {
@@ -25,7 +24,6 @@ export class RegisterEffect {
             this.persistanceService.set('accessToken', currentUser.token);
             return registerSuccessAction({ currentUser });
           }),
-
           catchError((errorResponse: HttpErrorResponse) => {
             return of(
               registerFailureAction({ errors: errorResponse.error.errors })
