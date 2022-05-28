@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { RegisterComponent } from 'src/app/auth/components/register/register.component';
 import { LoginComponent } from 'src/app/auth/components/login/login.component';
-import { BackendErrorMessagesModule } from '../shared/modules/backendErrorMessages/backendErrorMessages.module';
+import { BackendErrorMessagesModule } from '../shared/modules/backend-error-messages/backend-error-messages.module';
 import { PersistanceService } from '../shared/services/persistance.service';
 import { AuthService } from './services/auth.service';
 import { reducers } from './store/reducers';

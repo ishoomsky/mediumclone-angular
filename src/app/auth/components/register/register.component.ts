@@ -4,8 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../../services/auth.service';
-import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.interface';
-import { RegisterRequestInterface } from '../../types/registerRequest.interface';
+import { BackendErrorsInterface } from 'src/app/shared/types/backend-errors.interface';
+import { RegisterRequestInterface } from '../../types/register-request.interface';
 import { registerAction } from '../../store/actions/register.action';
 import {
   isSubmittingSelector,

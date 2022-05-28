@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { PersistanceService } from 'src/app/shared/services/persistance.service';
-import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
+import { CurrentUserInterface } from 'src/app/shared/types/current-user.interface';
 import { AuthService } from '../../services/auth.service';
 import {
   registerAction,

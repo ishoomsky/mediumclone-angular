@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.interface';
+import { BackendErrorsInterface } from 'src/app/shared/types/backend-errors.interface';
 
 @Component({
   selector: 'mc-backend-error-messages',
-  templateUrl: './backendErrorMessages.component.html',
-  styleUrls: ['./backendErrorMessages.component.scss'],
+  templateUrl: './backend-error-messages.component.html',
+  styleUrls: ['./backend-error-messages.component.scss'],
 })
 export class BackendErrorMessagesComponent implements OnInit {
   @Input('backendErrors') backendErrorsProps: BackendErrorsInterface | null;
