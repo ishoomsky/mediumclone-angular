@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, catchError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { CurrentUserInterface } from 'src/app/shared/types/current-user.interface';
@@ -12,7 +12,7 @@ import { LoginRequestInterface } from '../types/login-request.interface';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  getUser(response: AuthResponseInterface) {
+  getUser(response: AuthResponseInterface): CurrentUserInterface {
     return response.user;
   }
   register(data: RegisterRequestInterface): Observable<CurrentUserInterface> {
@@ -26,5 +26,14 @@ export class AuthService {
     return this.http
       .post<AuthResponseInterface>(url, data)
       .pipe(map(this.getUser));
+  }
+
+  getCurrentUser(): Observable<CurrentUserInterface > {
+    const url = environment.apiUrl + '/user';
+    return this.http.get<AuthResponseInterface>(url).pipe(
+      map((response): CurrentUserInterface => {
+        return response.user;
+      })
+    );
   }
 }
