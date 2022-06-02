@@ -7,12 +7,16 @@ import { FeedComponent } from './components/feed/feed.component';
 import { GetFeedEffect } from './store/effects/get-feed.effect';
 import { reducers } from './store/reducers';
 import { FeedService } from './feed.service';
+import { RouterModule } from '@angular/router';
+import { ErrorMessageModule } from '../error-message/error-message.module';
 
 @NgModule({
   imports: [
     CommonModule,
     EffectsModule.forFeature([GetFeedEffect]),
     StoreModule.forFeature('feed', reducers),
+    RouterModule,
+    ErrorMessageModule
   ],
   declarations: [FeedComponent],
   exports: [FeedComponent],
