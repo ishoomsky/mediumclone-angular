@@ -21,19 +21,20 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   limit = environment.limit;
   baseUrl: string;
-  currentPage: number; 
-  
+  currentPage: number;
+
   queryParamsSubscription: Subscription;
 
-  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.initializeValues();
     this.fetchData();
     this.initializeListeners();
-  }
-  ngOnDestroy(): void {
-    this.queryParamsSubscription.unsubscribe();
   }
 
   initializeValues(): void {
@@ -50,10 +51,12 @@ export class FeedComponent implements OnInit, OnDestroy {
   initializeListeners(): void {
     this.queryParamsSubscription = this.route.queryParams.subscribe(
       (params: Params) => {
-        console.log('params', params);
-        this.currentPage = Number(params['page'] || '1')
-        console.log('current page: ', this.currentPage)
+        this.currentPage = Number(params['page'] || '1');
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.queryParamsSubscription.unsubscribe();
   }
 }
