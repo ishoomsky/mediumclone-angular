@@ -33,7 +33,6 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeValues();
-    this.fetchData();
     this.initializeListeners();
   }
 
@@ -44,14 +43,18 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.baseUrl = this.router.url.split('?')[0];
   }
 
-  fetchData(): void {
+  fetchFeed(): void {
+    const offset = this.currentPage * this.limit - this.limit;
     this.store.dispatch(getFeedAction({ url: this.apiUrlProps }));
+    
   }
 
   initializeListeners(): void {
     this.queryParamsSubscription = this.route.queryParams.subscribe(
       (params: Params) => {
-        this.currentPage = Number(params['page'] || '1');
+        this.currentPage = Number(params['page'] || '1');  
+        this.fetchFeed();
+        console.log('this.currentPage', this.currentPage);
       }
     );
   }
