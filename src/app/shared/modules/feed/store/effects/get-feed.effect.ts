@@ -5,10 +5,17 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 
 import { FeedService } from '../../feed.service';
 import { GetFeedResponseInterface } from '../../types/get-feed-response.interface';
-import { getFeedAction, getFeedFailureAction, getFeedSuccessAction } from '../actions/get-feed.action';
+import {
+  getFeedAction,
+  getFeedCountAction,
+  getFeedCountFailureAction,
+  getFeedCountSuccessAction,
+  getFeedFailureAction,
+  getFeedSuccessAction,
+} from '../actions/get-feed.action';
 @Injectable()
 export class GetFeedEffect {
-  getFeedEffect$ = createEffect(() => 
+  getFeedEffect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getFeedAction),
       switchMap(({ url }) => {
@@ -19,7 +26,24 @@ export class GetFeedEffect {
           catchError(() => {
             return of(getFeedFailureAction());
           })
-        )
+        );
+      })
+    )
+  );
+
+  getFeedCountEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getFeedCountAction),
+      switchMap(({ url }) => {
+        return this.feedService.getFeed(url).pipe(
+          map((feed: GetFeedResponseInterface) => {
+            const count = feed.articles.length;
+            return getFeedCountSuccessAction({ feedCount: count });
+          }),
+          catchError(() => {
+            return of(getFeedCountFailureAction());
+          })
+        );
       })
     )
   );

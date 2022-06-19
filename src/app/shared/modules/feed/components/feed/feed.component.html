@@ -1,16 +1,22 @@
 <mc-loading *ngIf="isLoading$ | async"></mc-loading>
-<mc-error-message *ngIf="error$ | async" [message]="(error$ | async)"></mc-error-message>
+<mc-error-message
+  *ngIf="error$ | async"
+  [message]="error$ | async"
+></mc-error-message>
 <div *ngIf="feed$ | async">
-  <div class="article-preview" *ngFor="let article of (feed$ | async)?.articles">
+  <div
+    class="article-preview"
+    *ngFor="let article of (feed$ | async)?.articles"
+  >
     <div class="article-meta">
       <a [routerLink]="['/profiles', article.author.username]">
-        <img [src]="article.author.image" alt="author">
+        <img [src]="article.author.image" alt="author" />
       </a>
       <div class="info">
-      <a [routerLink]="['/profiles', article.author.username]">
-        {{ article.author.username }}
-      </a>
-      <span class="date">{{ article.createdAt }}</span>
+        <a [routerLink]="['/profiles', article.author.username]">
+          {{ article.author.username }}
+        </a>
+        <span class="date">{{ article.createdAt }}</span>
       </div>
       <div class="pull-xs-right">ADD TO FAVORITES</div>
     </div>
@@ -20,11 +26,14 @@
       HERE IS LIST OF TAGS
     </a>
   </div>
-  
-  <mc-pagination 
-    [total]="(feed$ | async)?.articlesCount ?? null"
+
+  <mc-pagination
+    *ngIf="feedTotal$ | async as feedTotalTemplateVariable"
+    [total]="feedTotalTemplateVariable"
     [limit]="limit"
     [url]="baseUrl"
     [currentPage]="currentPage"
   ></mc-pagination>
+
+  <pre>{{ feedTotal$ | async | json }}</pre>
 </div>

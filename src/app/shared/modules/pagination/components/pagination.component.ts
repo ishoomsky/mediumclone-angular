@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { UtilitiesService } from "src/app/shared/services/utilities.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { UtilitiesService } from 'src/app/shared/services/utilities.service';
 
 @Component({
   selector: 'mc-pagination',
@@ -7,7 +7,7 @@ import { UtilitiesService } from "src/app/shared/services/utilities.service";
   templateUrl: './pagination.component.html',
 })
 export class PaginationComponent implements OnInit {
-  @Input('total') totalProps: number | null;
+  @Input('total') totalProps: number;
   @Input('limit') limitProps: number;
   @Input('currentPage') currentPageProps: number;
   @Input('url') urlProps: string;
@@ -16,11 +16,8 @@ export class PaginationComponent implements OnInit {
   pages: Array<number>;
 
   constructor(private utilitiesService: UtilitiesService) {}
-
   ngOnInit(): void {
-    if(this.totalProps) {
-      this.pagesCount = Math.ceil(this.totalProps / this.limitProps);
-    };
+    this.pagesCount = Math.ceil(this.totalProps / this.limitProps);
     this.pages = this.utilitiesService.range(1, this.pagesCount);
   }
 }

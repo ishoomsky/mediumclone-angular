@@ -1,7 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { FeedStateInterface } from '../types/feed-state.interface';
 
-export const feedFeatureSelector = createFeatureSelector<FeedStateInterface>('feed');
+export const feedFeatureSelector =
+  createFeatureSelector<FeedStateInterface>('feed');
 
 export const isLoadingSelector = createSelector(
   feedFeatureSelector,
@@ -16,4 +17,9 @@ export const errorSelector = createSelector(
 export const dataSelector = createSelector(
   feedFeatureSelector,
   (feedState: FeedStateInterface) => feedState.data
+);
+
+export const dataCountSelector = createSelector(
+  feedFeatureSelector,
+  (feedState: FeedStateInterface) => feedState.count
 );
