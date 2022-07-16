@@ -12,8 +12,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { TopBarModule } from './shared/modules/top-bar/top-bar.module';
 import { PersistanceService } from './shared/services/persistance.service';
 import { AuthInterceptor } from './shared/services/auth-interceptor.service';
-import { GlobalFeed } from './global-feed/global-feed.module';
+import { GlobalFeedModule } from './global-feed/global-feed.module';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { YourFeedModule } from "./your-feed/your-feed.module";
+import { TagFeedModule } from "./tag-feed/tag-feed.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +23,9 @@ import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    GlobalFeed,
+    GlobalFeedModule,
+    YourFeedModule,
+    TagFeedModule,
     HttpClientModule,
     StoreModule.forRoot({
       router: routerReducer,
@@ -45,4 +49,5 @@ import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
