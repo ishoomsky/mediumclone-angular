@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class PersistanceService {
+export class PersistenceService {
   set(key: string, data: any): void {
     try {
       localStorage.setItem(key, JSON.stringify(data));
@@ -9,6 +9,7 @@ export class PersistanceService {
       console.error('Error saving data to localStorage: ', error);
     }
   }
+
   get(key: string): any {
     try {
       const localStorageValue = localStorage.getItem(key);
