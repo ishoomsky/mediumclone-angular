@@ -4,7 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { PersistanceService } from 'src/app/shared/services/persistance.service';
+import { PersistenceService } from 'src/app/shared/services/persistance.service';
 import { CurrentUserInterface } from 'src/app/shared/types/current-user.interface';
 import { AuthService } from '../../services/auth.service';
 import {
@@ -18,15 +18,15 @@ export class LoginEffect {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loginAction),
-      switchMap(({ request }) => {
+      switchMap(({request}) => {
         return this.authService.login(request).pipe(
           map((currentUser: CurrentUserInterface) => {
-            this.persistanceService.set('accessToken', currentUser.token);
-            return loginSuccessAction({ currentUser });
+            this.persistenceService.set('accessToken', currentUser.token);
+            return loginSuccessAction({currentUser});
           }),
           catchError((errorResponse: HttpErrorResponse) => {
             return of(
-              loginFailureAction({ errors: errorResponse.error.errors })
+              loginFailureAction({errors: errorResponse.error.errors})
             );
           })
         );
@@ -44,13 +44,14 @@ export class LoginEffect {
         })
       );
     },
-    { dispatch: false }
+    {dispatch: false}
   );
 
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private persistanceService: PersistanceService,
+    private persistenceService: PersistenceService,
     private router: Router
-  ) {}
+  ) {
+  }
 }

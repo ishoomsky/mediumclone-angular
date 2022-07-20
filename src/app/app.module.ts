@@ -10,7 +10,7 @@ import { AuthModule } from 'src/app/auth/auth.module';
 import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { TopBarModule } from './shared/modules/top-bar/top-bar.module';
-import { PersistanceService } from './shared/services/persistance.service';
+import { PersistenceService } from './shared/services/persistance.service';
 import { AuthInterceptor } from './shared/services/auth-interceptor.service';
 import { GlobalFeedModule } from './global-feed/global-feed.module';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -40,7 +40,7 @@ import { TagFeedModule } from "./tag-feed/tag-feed.module";
     TopBarModule,
   ],
   providers: [
-    PersistanceService,
+    PersistenceService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
