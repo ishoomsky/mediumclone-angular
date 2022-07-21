@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
 
 import { ArticleService as SharedArticleService } from '../../../shared/services/article.service';
-import { getArticleAction, getArticleFailureAction, getArticleSuccessAction } from "../actions/get-feed.action";
+import { getArticleAction, getArticleFailureAction, getArticleSuccessAction } from "../actions/get-article.action";
 import { ArticleInterface } from "../../../shared/types/article.interface";
 
 @Injectable()
